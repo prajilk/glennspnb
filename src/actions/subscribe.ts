@@ -1,5 +1,6 @@
 "use server";
 
+import connectDB from "@/config/mongoose";
 import EmailSubscriber from "@/models/email-subscribers";
 
 export async function subscribeAction(formData: FormData) {
@@ -7,6 +8,7 @@ export async function subscribeAction(formData: FormData) {
     if (!email) return;
 
     try {
+        await connectDB();
         await EmailSubscriber.create({
             email,
         });
