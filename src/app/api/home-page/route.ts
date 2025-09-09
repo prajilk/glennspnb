@@ -4,6 +4,7 @@ import { processImages } from "./helper";
 import { withDbConnectAndAuth } from "@/lib/with-db-connect-and-auth";
 import { ZodHomePageSchema } from "@/lib/zod-schema";
 import HomePage from "@/models/home-page";
+import { revalidatePath } from "next/cache";
 
 async function postHandler(req: AuthenticatedRequest) {
     try {
@@ -115,12 +116,13 @@ async function postHandler(req: AuthenticatedRequest) {
             { upsert: true }
         );
 
+        revalidatePath("/");
+
         return success200({
             success: true,
             message: "Successful",
         });
     } catch (error) {
-        console.log(error);
         return error500({
             message:
                 error instanceof Error ? error.message : "Something went wrong",

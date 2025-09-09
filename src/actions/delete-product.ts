@@ -23,7 +23,6 @@ export async function deleteProductsAction(ids: string[]) {
         // 3. Delete products from DB
         const deleteResult = await Product.deleteMany({ _id: { $in: ids } });
 
-        revalidatePath("/admin/dashboard/products");
         revalidatePath("/");
 
         return {
@@ -31,7 +30,6 @@ export async function deleteProductsAction(ids: string[]) {
             message: `${deleteResult.deletedCount}/${ids.length} products deleted`,
         };
     } catch (error) {
-        console.log(error);
         return {
             error: true,
             message:

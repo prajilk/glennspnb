@@ -2,7 +2,6 @@
 
 import { withDbConnectAndActionAuth } from "@/lib/with-db-connect-and-auth";
 import EmailSubscriber from "@/models/email-subscribers";
-import { revalidatePath } from "next/cache";
 
 export async function deleteEmailSubscribersAction(ids: string[]) {
     try {
@@ -11,8 +10,6 @@ export async function deleteEmailSubscribersAction(ids: string[]) {
         const deleteResult = await EmailSubscriber.deleteMany({
             _id: { $in: ids },
         });
-
-        revalidatePath("/admin/dashboard/email-subscribers");
 
         return {
             success: true,

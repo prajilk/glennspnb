@@ -38,6 +38,8 @@ async function postHandler(req: AuthenticatedRequest) {
             },
         });
 
+        revalidatePath("/");
+
         return success201({
             success: true,
             message: "Successful",
@@ -93,7 +95,7 @@ async function putHandler(req: AuthenticatedRequest) {
             }
         );
 
-        revalidatePath("/admin/dashboard/products");
+        revalidatePath("/");
 
         return success200({
             success: true,
@@ -101,7 +103,6 @@ async function putHandler(req: AuthenticatedRequest) {
             data: { ...result.data, image: images.image?.url },
         });
     } catch (error) {
-        console.log(error);
         return error500({
             message:
                 error instanceof Error ? error.message : "Something went wrong",
