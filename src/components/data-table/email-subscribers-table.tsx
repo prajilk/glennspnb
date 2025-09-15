@@ -3,7 +3,6 @@
 import { ReactNode, useState } from "react";
 import {
     ColumnDef,
-    FilterFn,
     flexRender,
     getCoreRowModel,
     useReactTable,
