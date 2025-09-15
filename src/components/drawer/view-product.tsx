@@ -27,9 +27,11 @@ import { type ReactNode, useState } from "react";
 export function ViewProduct({
     children,
     product,
+    className,
 }: {
     children: ReactNode;
     product: ProductDocument;
+    className?: string;
 }) {
     const [open, setOpen] = useState(false);
     const isMobile = useIsMobile();
@@ -55,7 +57,7 @@ export function ViewProduct({
 
     return (
         <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger>{children}</DrawerTrigger>
+            <DrawerTrigger className={className}>{children}</DrawerTrigger>
             <DrawerContent className="min-h-[90%]">
                 <DrawerHeader className="text-left">
                     <DrawerTitle className="sr-only">

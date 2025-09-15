@@ -26,7 +26,7 @@ const ProductsSection = ({
                 <p className="max-w-5xl mx-auto text-sm md:text-lg">
                     {description}
                 </p>
-                <div className="grid md:grid-cols-2 gap-5 mt-10 md:mt-14 lg:mt-20">
+                <div className="hidden md:grid md:grid-cols-2 gap-5 mt-10 md:mt-14 lg:mt-20">
                     <div className="w-full lg:w-11/12 aspect-square relative rounded-4xl overflow-hidden">
                         <Image
                             src={featuredProduct.productImage.url}
@@ -57,24 +57,56 @@ const ProductsSection = ({
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-7 gap-y-10 mt-20">
-                    {products.map((product) => (
-                        <ViewProduct key={product._id} product={product}>
-                            <div className="flex flex-col justify-center items-center gap-4 w-full">
-                                <div className="relative w-full aspect-square">
-                                    <Image
-                                        src={product.image.url}
-                                        alt={product.productName}
-                                        fill
-                                        className="object-cover rounded-3xl"
-                                    />
-                                </div>
-                                <span className="text-xl font-semibold text-[#1f2124]">
-                                    {product.productName}
-                                </span>
+                <div className="md:hidden">
+                    <ViewProduct
+                        product={{
+                            _id: "abcd",
+                            productName: featuredProduct.productTitle,
+                            productTitle: featuredProduct.productTitle,
+                            description: featuredProduct.productDescription,
+                            image: featuredProduct.productImage,
+                            keyBenefits: featuredProduct.keyBenefits,
+                        }}
+                        className="w-full mt-10"
+                    >
+                        <div className="flex flex-col justify-center items-center gap-4 w-full">
+                            <div className="relative w-full aspect-square">
+                                <Image
+                                    src={featuredProduct.productImage.url}
+                                    alt={featuredProduct.productTitle}
+                                    fill
+                                    className="object-cover rounded-3xl"
+                                />
                             </div>
-                        </ViewProduct>
-                    ))}
+                            <div className="text-xl font-semibold text-[#1f2124] bg-white rounded-md px-4 py-1 border">
+                                {featuredProduct.productName}
+                            </div>
+                        </div>
+                    </ViewProduct>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-7 gap-y-10 mt-10 md:mt-20">
+                    {products
+                        ?.sort((a, b) =>
+                            a.productName.localeCompare(b.productName)
+                        )
+                        .map((product) => (
+                            <ViewProduct key={product._id} product={product}>
+                                <div className="flex flex-col justify-center items-center gap-4 w-full">
+                                    <div className="relative w-full aspect-square">
+                                        <Image
+                                            src={product.image.url}
+                                            alt={product.productName}
+                                            fill
+                                            className="object-cover rounded-3xl"
+                                        />
+                                    </div>
+                                    <div className="text-xl font-semibold text-[#1f2124] bg-white rounded-md px-4 py-1 border">
+                                        {product.productName}
+                                    </div>
+                                </div>
+                            </ViewProduct>
+                        ))}
                 </div>
             </div>
         </section>

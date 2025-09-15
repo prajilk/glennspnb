@@ -103,6 +103,32 @@ const ProductBlock = ({
                         </div>
                         <FormField
                             control={form.control}
+                            name="productsSection.featuredProduct.productName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <div className="space-y-2 w-full">
+                                            <h4 className="text-xs font-semibold">
+                                                Product Name
+                                                <span className="text-red-600">
+                                                    *
+                                                </span>
+                                            </h4>
+                                            <Input
+                                                placeholder={"Product Name"}
+                                                className={
+                                                    "w-full bg-accent/70"
+                                                }
+                                                {...field}
+                                            />
+                                        </div>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
                             name="productsSection.featuredProduct.productTitle"
                             render={({ field }) => (
                                 <FormItem>

@@ -58,6 +58,10 @@ export const ZodHomePageSchema = z.object({
                 .string()
                 .min(5, "Product title must be 5 or more characters long")
                 .max(255, "Product title must be 255 or less characters long"),
+            productName: z
+                .string()
+                .min(5, "Title must be 5 or more characters long")
+                .max(100, "Title must be 100 or less characters long"),
             productDescription: z.string({
                 message: "Product description is required",
             }),

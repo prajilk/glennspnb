@@ -103,6 +103,10 @@ const HomePageSchema = new Schema<HomePageDocument>(
                         type: String,
                     },
                 },
+                productName: {
+                    type: String,
+                    required: true,
+                },
                 productTitle: {
                     type: String,
                     required: true,

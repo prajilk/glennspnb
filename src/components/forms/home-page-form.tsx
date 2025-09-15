@@ -95,6 +95,7 @@ const HomePageForm = ({
                   featuredProduct: {
                       productImage: "",
                       productTitle: "",
+                      productName: "",
                       productDescription: "",
                       keyBenefits: [],
                   },

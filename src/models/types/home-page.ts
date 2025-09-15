@@ -41,6 +41,7 @@ export type HomePageDocument = {
                 url: string;
                 publicId: string;
             };
+            productName: string;
             productTitle: string;
             productDescription: string;
             keyBenefits: string[];
