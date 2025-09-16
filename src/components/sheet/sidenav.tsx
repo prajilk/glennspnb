@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu } from "lucide-react";
 import {
     Sheet,
@@ -10,13 +12,15 @@ import {
 import Link from "next/link";
 import type { HomePageDocument } from "@/models/types/home-page";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 type HeaderProps = Pick<HomePageDocument["header"], "headerMenu">;
 
 const Sidenav = ({ headerMenu }: HeaderProps) => {
+    const [isOpen, setIsOpen] = useState(false);
     if (!headerMenu || headerMenu.length === 0) return null;
     return (
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger className="md:hidden">
                 <Menu />
             </SheetTrigger>
@@ -30,11 +34,19 @@ const Sidenav = ({ headerMenu }: HeaderProps) => {
                 <ul className="px-5 space-y-5">
                     {headerMenu.slice(0, 3).map((item) => (
                         <li key={item.name}>
-                            <Link href={item.url}>{item.name}</Link>
+                            <Link
+                                href={item.url}
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {item.name}
+                            </Link>
                         </li>
                     ))}
                     <li>
-                        <Link href={headerMenu.at(-1)?.url || "#contact"}>
+                        <Link
+                            href={headerMenu.at(-1)?.url || "#contact"}
+                            onClick={() => setIsOpen(false)}
+                        >
                             <Button className="rounded-full uppercase tracking-wider px-6 pt-2.5 pb-2 h-fit">
                                 {headerMenu.at(-1)?.name || "Contact Us"}
                             </Button>
